@@ -1,35 +1,54 @@
-# Backend API
+# Backend
 
-A simple Deno backend API using Oak framework.
+This is a Deno backend using the Oak framework.
 
-## Getting Started
+## Development
 
-1. Install Deno if you haven't already: https://deno.land/manual/getting_started/installation
+Run the development server:
 
-2. Copy environment variables:
+```bash
+deno task dev
+```
+
+The server will start on `http://localhost:3000` with API endpoints available at `/api/*`.
+
+## Production
+
+To run in production mode with static file serving:
+
+1. **Build the frontend** (from the project root):
    ```bash
-   cp .env.example .env
+   cd frontend
+   npm run build
+   cd ..
    ```
 
-3. Run the development server:
+2. **Start the production server**:
    ```bash
-   deno task dev
-   ```
-
-4. Or run in production mode:
-   ```bash
+   cd backend
    deno task start
    ```
 
-The API will be available at `http://localhost:8000`
+In production mode, the server will:
+- Serve API routes at `/api/*`
+- Serve static files from `../frontend/dist`
+- Handle client-side routing by serving `index.html` for non-API routes
 
-## Endpoints
+## Environment Variables
 
-- `GET /` - Root endpoint
-- `GET /health` - Health check
-- `GET /api/users` - Get all users
-- `GET /api/users/:id` - Get user by ID
-- `POST /api/users` - Create new user
+- `PORT`: Server port (default: 3000)
+- `NODE_ENV`: Set to "production" to enable static file serving
+
+## API Routes
+
+- `GET /api/welcome` - Welcome message endpoint
+
+## Static File Serving
+
+When `NODE_ENV=production`, the backend automatically serves:
+- Static assets (CSS, JS, images) from the frontend build
+- The main `index.html` file for client-side routing
+- Proper fallback handling for Single Page Application (SPA) routing
 
 ## Project Structure
 
