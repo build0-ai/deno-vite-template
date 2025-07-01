@@ -27,7 +27,7 @@ if (isProduction) {
     try {
       // Try to serve static files from frontend dist
       await send(ctx, pathname, {
-        root: "../frontend/dist",
+        root: "./frontend/dist",
         index: "index.html",
       });
     } catch (error) {
@@ -40,6 +40,6 @@ if (isProduction) {
 console.log(`Server running on http://localhost:${port}`);
 console.log(`Production mode: ${isProduction ? "enabled" : "disabled"}`);
 if (isProduction) {
-  console.log("Serving static files from ../frontend/dist");
+  console.log("Serving static files from ./frontend/dist");
 }
 await app.listen({ port });
